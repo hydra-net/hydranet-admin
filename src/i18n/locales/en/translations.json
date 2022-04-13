@@ -1,0 +1,9 @@
+{
+  "connect-wallet": "Connect wallet",
+  "hydra-admin-title": "Hydra admin portal",
+  "connect-wallet-continue-message": "Please connect your wallet to continue",
+  "not-found": "Not found 404",
+  "notification": {
+    "copied": "Copied!"
+  }
+}
