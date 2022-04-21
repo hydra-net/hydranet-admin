@@ -5,15 +5,12 @@ import { getHorizontalGap } from "../../styles";
 import { Label } from "../Label/Label";
 import hydraLogo from "../../../assets/png/hydra-logo.png";
 import bondLogo from "../../../assets/png/bond.png";
+import { Link } from "react-router-dom";
 
-interface StyledMenuProps {
-  open: boolean;
-}
-export const StyledMenu = styled.nav<StyledMenuProps>`
+export const StyledMenu = styled.nav`
   display: flex;
   flex-direction: column;
   background: #0d1328;
-  transform: ${({ open }) => (open ? "translateX(0)" : "translateX(-100%)")};
   height: 100vh;
   text-align: left;
   padding: 2rem;
@@ -23,13 +20,13 @@ export const StyledMenu = styled.nav<StyledMenuProps>`
   transition: transform 0.3s ease-in-out;
 `;
 
-const MenuLink = styled.div`
+const MenuLink = styled(Link)`
   display: flex;
   align-items: center;
   justify-items: center;
   align-content: center;
   ${getHorizontalGap("10px")};
-  padding: 5rem 0;
+  padding: 0.5rem 0;
   font-weight: bold;
   color: ${({ theme }) => theme.colors.white};
   text-decoration: none;
@@ -52,6 +49,7 @@ const StyledLabel = styled(Label)`
 const TitleContainer = styled.div`
   display: flex;
   ${getHorizontalGap("10px")};
+  margin-bottom: 5rem;
 `;
 
 const Title = styled(Label)`
@@ -67,31 +65,29 @@ const Logo = styled.img`
 `;
 
 type Props = {
-  open: boolean;
   props?: any;
 };
 
-const Menu = ({ open, props }: Props) => {
-  const isHidden = open ? true : false;
-  //   const tabIndex = isHidden ? 0 : -1;
+const Menu = ({ props }: Props) => {
   const { t } = useTranslation();
+
   return (
-    <StyledMenu open={open} aria-hidden={!isHidden} {...props}>
+    <StyledMenu {...props}>
       <TitleContainer>
         <Logo src={hydraLogo} alt="hydra logo" />
         <Title>{t("hydra-admin-title")}</Title>
       </TitleContainer>
 
-      <MenuLink>
+      <MenuLink to={"/"}>
         <div>
           <img
             src={bondLogo}
             style={{ width: "25px", height: "auto" }}
-            alt="Bond"
+            alt="Create bond"
           />
         </div>
 
-        <StyledLabel>Bonds</StyledLabel>
+        <StyledLabel>{t("bonds.create-bond-title")}</StyledLabel>
       </MenuLink>
     </StyledMenu>
   );

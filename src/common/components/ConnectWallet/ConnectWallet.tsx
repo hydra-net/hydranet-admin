@@ -2,32 +2,25 @@ import React from "react";
 import { useWeb3 } from "@chainsafe/web3-context";
 import { toast } from "react-toastify";
 import { useTranslation } from "react-i18next";
-
 import { Button } from "../Buttons/Button";
 import Icon from "../Icon/Icon";
-
 import { theme } from "../../../shell/theme/theme";
 import { DEFAULT_NOTIFY_CONFIG } from "../../constants";
 import { formatWalletAddress } from "../../../helpers/walletHelper";
-const { REACT_APP_DEFAULT_NETWORK_ID } = process.env;
+import { NetworkId } from "../../../networkDetails";
 
 const ConnectWallet = () => {
   const { onboard, wallet, address = "", network } = useWeb3();
   const { t } = useTranslation();
 
-  const isWrongNetwork = parseInt(REACT_APP_DEFAULT_NETWORK_ID!) !== network;
+  const isWrongNetwork =
+    NetworkId.ARBITRUM !== network && NetworkId.ARBITRUM_TESTNET !== network;
 
   const handleConnectWallet = async () => {
     if (!wallet) {
       await onboard?.walletSelect();
     }
     await onboard?.walletCheck();
-  };
-
-  const handleDisconnectWallet = async () => {
-    onboard?.walletReset();
-    localStorage.removeItem("walletconnect");
-    localStorage.removeItem("metamask");
   };
 
   const handleCopyAddress = (evt: React.MouseEvent<HTMLButtonElement>) => {
@@ -71,7 +64,6 @@ const ConnectWallet = () => {
           </span>
         )}
       </Button>
-      <Button onClick={handleDisconnectWallet}>Disconnect</Button>
     </div>
   );
 };

@@ -1,6 +1,9 @@
 import { ethers } from "ethers";
 import Web3 from "web3";
-import { arbitrumInfuraName, arbitrumRinkebyInfuraName } from "../constants";
+import {
+  arbitrumInfuraName,
+  arbitrumRinkebyInfuraName,
+} from "../../networkDetails";
 
 const { REACT_APP_DEFAULT_NETWORK_ID, REACT_APP_ETH_INFURA_ID } = process.env;
 

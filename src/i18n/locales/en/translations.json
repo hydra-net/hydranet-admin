@@ -3,6 +3,19 @@
   "hydra-admin-title": "Hydra admin portal",
   "connect-wallet-continue-message": "Please connect your wallet to continue",
   "not-found": "Not found 404",
+  "bonds": {
+    "create-bond-title": "Create bond",
+    "close-bond": "Close bond",
+    "create-bond-btn": "create"
+  },
+  "quoteToken": "Quote token",
+  "market": "Bond capacity",
+  "booleans": "Booleans",
+  "terms": "Terms",
+  "intervals": "Intervals",
+  "bond-ending": "Bond ending days",
+  "bond-price": "Bond price",
+  "select-bond-token": "Select bond token",
   "notification": {
     "copied": "Copied!"
   }

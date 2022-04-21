@@ -1,4 +1,4 @@
-import { Label } from "../../common/components/Label/Label";
+import { Label } from "../Label/Label";
 
 type Props = {
   href: string;

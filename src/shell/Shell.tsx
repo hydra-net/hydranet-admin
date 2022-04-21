@@ -9,13 +9,14 @@ import { lazyWithPreload } from "../helpers/lazy";
 import { routes } from "../routes";
 import { theme } from "./theme/theme";
 
-const Home = lazyWithPreload(
-  () => import(/* webpackChunkName: 'LandingModule' */ "../modules/Home/Home")
+const CreateBond = lazyWithPreload(
+  () =>
+    import(/* webpackChunkName: 'BondsModule' */ "../modules/Bonds/CreateBond")
 );
 
 const Page404 = lazyWithPreload(
   () =>
-    import(/* webpackChunkName: 'LandingModule' */ "../modules/Page404/Page404")
+    import(/* webpackChunkName: 'Page404Module' */ "../modules/Page404/Page404")
 );
 
 const Shell = () => {
@@ -24,7 +25,7 @@ const Shell = () => {
       <Layout theme={theme}>
         <Suspense fallback={<Fallback />}>
           <Routes>
-            <Route path={routes.home} element={<Home />} />
+            <Route path={routes.bonds} element={<CreateBond />} />
             <Route path={routes.page404} element={<Page404 />} />
             <Route path="*" element={<Page404 />} />
           </Routes>
