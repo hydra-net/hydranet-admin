@@ -94,7 +94,7 @@ Root folder contains:
 
   - `DAI` - after checking price add 10% discount so let's say `$0.01647` is price, `10%` = `%0,001647`, price is `%0,014823`.
     Use all numbers from start except zeros so `14823` if price is less than `$1`, otherwise use all numbers and add zeros eg. `14823000` we have 8 zeros because price is less than `$1`.
-    If `price` is higher than `$1` than you have to have combined `9` zeros, if price is `0.0016544` you have to have `7` zeros etc.
+    If `price` is higher than `$1` than you have to have combined `9` digits, if price is `0.0016544` you have to have `7` digits etc.
 
   - `WETH` - got to uniswap and check how price of `1` HDX stands against ETH. Let's say `1` HDX is `0.00000478437` ETH.
     Use first 4 numbers that are not `0`, so `4784` add `10%` discount to that, so `478,4` and you get bond price `4305,6` remove decimals `4305` is your price.
