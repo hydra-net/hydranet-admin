@@ -14,7 +14,9 @@ const ConnectWallet = () => {
   const { t } = useTranslation();
 
   const isWrongNetwork =
-    NetworkId.ARBITRUM !== network && NetworkId.ARBITRUM_TESTNET !== network;
+    NetworkId.ARBITRUM !== network &&
+    NetworkId.ARBITRUM_TESTNET !== network &&
+    NetworkId.RINKEBY !== network;
 
   const handleConnectWallet = async () => {
     if (!wallet) {

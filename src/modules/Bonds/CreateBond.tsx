@@ -6,18 +6,16 @@ import CreateBondForm from "./CreateBondForm";
 import { ICreateBondFormValues } from "../../common/interfaces";
 import { getEncodedCreateFunction } from "../../helpers/bondDepositoryHelper";
 import { useWeb3 } from "@chainsafe/web3-context";
-import {
-  addresses,
-  arbitrumInfuraName,
-  arbitrumRinkebyInfuraName,
-  NetworkId,
-  NETWORK_EXPLORER_URLS,
-} from "../../networkDetails";
+import { addresses } from "../../networkDetails";
 import { toast } from "react-toastify";
 import { BigNumber } from "ethers";
 import CustomToastWithLink from "../../common/components/TransLink/TransactionLink";
 import { DEFAULT_NOTIFY_CONFIG } from "../../common/constants";
-import { getWeb3Initialised } from "../../common/web3/web3";
+import {
+  getBlockTimestamp,
+  getTxHashShort,
+  getTxUrl,
+} from "../../common/web3/web3";
 import { parseUnits } from "ethers/lib/utils";
 
 const Root = styled.div`
@@ -48,35 +46,29 @@ const CreateBond = () => {
   const { t } = useTranslation();
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const { provider, network, address } = useWeb3();
+
+  // const bond params
   const depositInterval = 60 * 60 * 24;
   const timeToConclusionFixed = 24 * 60 * 60;
-  const buffer = 100000;
+  const buffer = BigNumber.from(100000);
+  const booleansArr = [true, true];
 
   const handleSubmit = async (values: ICreateBondFormValues) => {
     setIsLoading(true);
     try {
       const { quoteToken, capacity, price, ending } = values;
 
-      const capacityBig = parseUnits(capacity.toString(), 18);
-      const priceBig = BigNumber.from(price);
-      const bufferBig = BigNumber.from(buffer);
+      const marketArr = [
+        parseUnits(capacity.toString(), 18),
+        BigNumber.from(price),
+        buffer,
+      ];
 
-      const marketArr = [capacityBig, priceBig, bufferBig];
-      const booleansArr = [true, true];
-
-      const web3 = getWeb3Initialised(
-        network === NetworkId.ARBITRUM
-          ? arbitrumInfuraName
-          : arbitrumRinkebyInfuraName
-      );
-
-      const blockTimestamp = Number(
-        (await web3.eth.getBlock(await web3.eth.getBlockNumber())).timestamp
-      );
+      const currentBlockTimestamp = await getBlockTimestamp(network!);
 
       const timeToConclusion = timeToConclusionFixed * ending;
       const vesting = timeToConclusion;
-      const conclusion = blockTimestamp + timeToConclusion;
+      const conclusion = currentBlockTimestamp + timeToConclusion;
       const termsArr = [vesting, conclusion];
 
       const tuneInterval = timeToConclusion;
@@ -96,21 +88,10 @@ const CreateBond = () => {
         from: address!,
       });
 
-      let transUrl =
-        network === NetworkId.ARBITRUM
-          ? `${NETWORK_EXPLORER_URLS[NetworkId.ARBITRUM]}/tx/${tx.hash}`
-          : `${NETWORK_EXPLORER_URLS[NetworkId.ARBITRUM_TESTNET]}/tx/${
-              tx.hash
-            }`;
+      let transUrl = getTxUrl(network!, tx.hash);
+
       toast.success(
-        <CustomToastWithLink
-          href={transUrl}
-          text={
-            tx.hash.substring(0, 4) +
-            "..." +
-            tx.hash.substring(tx.hash.length - 4, tx.hash.length)
-          }
-        />,
+        <CustomToastWithLink href={transUrl} text={getTxHashShort(tx.hash)} />,
         {
           ...DEFAULT_NOTIFY_CONFIG,
           autoClose: false,
