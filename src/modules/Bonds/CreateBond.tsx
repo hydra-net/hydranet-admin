@@ -6,7 +6,7 @@ import CreateBondForm from "./CreateBondForm";
 import { ICreateBondFormValues } from "../../common/interfaces";
 import { getEncodedCreateFunction } from "../../helpers/bondDepositoryHelper";
 import { useWeb3 } from "@chainsafe/web3-context";
-import { addresses } from "../../networkDetails";
+import { addresses, NetworkId } from "../../networkDetails";
 import { toast } from "react-toastify";
 import { BigNumber } from "ethers";
 import CustomToastWithLink from "../../common/components/TransLink/TransactionLink";
@@ -114,7 +114,7 @@ const CreateBond = () => {
           <Title>{t("bonds.create-bond-title")}</Title>
         </TitleContainer>
         <CreateBondForm
-          network={network!}
+          network={!network ? NetworkId.ARBITRUM : network}
           isLoading={isLoading}
           isFormDisabled={!address}
           onSubmit={handleSubmit}
