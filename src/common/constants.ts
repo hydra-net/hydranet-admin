@@ -7,3 +7,5 @@ export const DEFAULT_NOTIFY_CONFIG: NotificationType = {
   closeOnClick: false,
   hideProgressBar: true,
 };
+
+export const SUPPORTED_NETOWRKS = [42161, 421611, 4];

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { useTranslation } from "react-i18next";
 import { Label } from "../../common/components/Label/Label";
@@ -6,11 +6,14 @@ import CreateBondForm from "./CreateBondForm";
 import { ICreateBondFormValues } from "../../common/interfaces";
 import { getEncodedCreateFunction } from "../../helpers/bondDepositoryHelper";
 import { useWeb3 } from "@chainsafe/web3-context";
-import { addresses, NetworkId } from "../../networkDetails";
+import { addresses } from "../../networkDetails";
 import { toast } from "react-toastify";
 import { BigNumber } from "ethers";
 import CustomToastWithLink from "../../common/components/TransLink/TransactionLink";
-import { DEFAULT_NOTIFY_CONFIG } from "../../common/constants";
+import {
+  DEFAULT_NOTIFY_CONFIG,
+  SUPPORTED_NETOWRKS,
+} from "../../common/constants";
 import {
   getBlockTimestamp,
   getTxHashShort,
@@ -45,7 +48,19 @@ const Title = styled(Label)`
 const CreateBond = () => {
   const { t } = useTranslation();
   const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [networkId, setNetworkId] = useState<number>(42161);
   const { provider, network, address } = useWeb3();
+
+  useEffect(() => {
+    if (SUPPORTED_NETOWRKS.includes(network!)) {
+      setNetworkId(network!);
+    } else {
+      toast.error("Wrong network", {
+        ...DEFAULT_NOTIFY_CONFIG,
+        autoClose: false,
+      });
+    }
+  }, [network]);
 
   // const bond params
   const depositInterval = 60 * 60 * 24;
@@ -114,7 +129,7 @@ const CreateBond = () => {
           <Title>{t("bonds.create-bond-title")}</Title>
         </TitleContainer>
         <CreateBondForm
-          network={!network ? NetworkId.ARBITRUM : network}
+          network={networkId}
           isLoading={isLoading}
           isFormDisabled={!address}
           onSubmit={handleSubmit}
