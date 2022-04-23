@@ -70,7 +70,7 @@ const CreateBond = () => {
       const { quoteToken, capacity, price, ending } = values;
 
       const marketArr = [
-        BigNumber.from(capacity.toString()),
+        BigNumber.from(capacity),
         BigNumber.from(price.toString()),
         buffer,
       ];

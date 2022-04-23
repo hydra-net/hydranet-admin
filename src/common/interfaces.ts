@@ -1,6 +1,6 @@
 export interface ICreateBondFormValues {
   quoteToken: string;
-  capacity: number;
-  price: string;
+  capacity: string;
+  price: number;
   ending: number;
 }
