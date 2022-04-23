@@ -61,17 +61,17 @@ const CreateBond = () => {
   // const bond params
   const depositInterval = 60 * 60 * 24;
   const timeToConclusionFixed = 24 * 60 * 60;
-  const buffer = BigNumber.from("100000");
+  const buffer: BigNumber = BigNumber.from(String("100000"));
   const booleansArr = [true, true];
 
   const handleSubmit = async (values: ICreateBondFormValues) => {
     setIsLoading(true);
     try {
-      const { quoteToken, ending } = values;
+      const { quoteToken, capacity, price, ending } = values;
 
       const marketArr = [
-        BigNumber.from("300000000000000000000"),
-        BigNumber.from("12890000"),
+        BigNumber.from(String(capacity)),
+        BigNumber.from(String(price.toString())),
         buffer,
       ];
 
