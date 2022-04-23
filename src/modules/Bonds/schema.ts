@@ -6,7 +6,7 @@ export const createBondValidationSchema = yup
     capacity: yup
       .string()
       .matches(/^[1-9][0-9]*$/, "Only positive non decimal numbers")
-      .max(18, "Bond capacity must be at most 18 characters")
+      .max(34, "Bond capacity must be at most 34 characters")
       .required("Bond capacity is a required field"),
     price: yup
       .number()
