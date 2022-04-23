@@ -67,11 +67,11 @@ const CreateBond = () => {
   const handleSubmit = async (values: ICreateBondFormValues) => {
     setIsLoading(true);
     try {
-      const { quoteToken, capacity, price, ending } = values;
+      const { quoteToken, capacity, ending } = values;
 
       const marketArr = [
         BigNumber.from(capacity),
-        BigNumber.from(price.toString()),
+        BigNumber.from("12890000"),
         buffer,
       ];
 
