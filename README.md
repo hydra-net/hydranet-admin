@@ -87,8 +87,9 @@ Root folder contains:
 - Select `bond token` either `DAI` or `WETH`
 - Add bond capacity:
 
-  - `DAI` - write numbers without decimals so `300` for `300` DAI
-  - `WETH` - you can here use max to 3 decimals so `0.555`for `0.555` wETH or whole numbers like `1`
+  - `DAI` for bond capacity `300` of `DAI` type `300` with 18 zeros so `300000000000000000000`
+  - `WETH` - for bond capacity`0.5` of `WETH` type `5` with 17 zeros so `500000000000000000`, if you want bond capacity `1` of `WETH` type `1` with 18 zeros so `1000000000000000000`
+  - for numbers higher than 1 just add number + `18` zeros, for numbers less than `1` you have to remove zeros from `18` digits available
 
 - Bond price:(check here https://dexscreener.com/arbitrum/0x1ca2a964cf3846bf53bcdbd7a1467b8ac6975d3a)
 
