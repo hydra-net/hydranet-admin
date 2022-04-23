@@ -64,10 +64,11 @@ const CreateBondSelect = ({
       <StyledSelectWrapper className="select-wrapper">
         <StyledSelect
           id={name}
+          defaultValue={"DEFAULT"}
           {...register(name)}
           disabled={isLoading || isFormDisabled}
         >
-          <StyledOption value="" disabled>
+          <StyledOption value="DEFAULT" disabled>
             {t("bonds.select-bond-token")}
           </StyledOption>
           <StyledOption value={addresses[network].DAI_ADDRESS}>
