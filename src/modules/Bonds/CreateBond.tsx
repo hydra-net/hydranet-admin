@@ -6,14 +6,11 @@ import CreateBondForm from "./CreateBondForm";
 import { ICreateBondFormValues } from "../../common/interfaces";
 import { getEncodedCreateFunction } from "../../helpers/bondDepositoryHelper";
 import { useWeb3 } from "@chainsafe/web3-context";
-import { addresses } from "../../networkDetails";
+import { addresses, NetworkId } from "../../networkDetails";
 import { toast } from "react-toastify";
 import { BigNumber } from "ethers";
 import CustomToastWithLink from "../../common/components/TransLink/TransactionLink";
-import {
-  DEFAULT_NOTIFY_CONFIG,
-  SUPPORTED_NETOWRKS,
-} from "../../common/constants";
+import { DEFAULT_NOTIFY_CONFIG } from "../../common/constants";
 import {
   getBlockTimestamp,
   getTxHashShort,
@@ -51,16 +48,16 @@ const CreateBond = () => {
   const [networkId, setNetworkId] = useState<number>(42161);
   const { provider, network, address } = useWeb3();
 
+  const isWrongNetwork =
+    NetworkId.ARBITRUM !== network &&
+    NetworkId.ARBITRUM_TESTNET !== network &&
+    NetworkId.RINKEBY !== network;
+
   useEffect(() => {
-    if (SUPPORTED_NETOWRKS.includes(network!)) {
+    if (network && !isWrongNetwork) {
       setNetworkId(network!);
-    } else {
-      toast.error("Wrong network", {
-        ...DEFAULT_NOTIFY_CONFIG,
-        autoClose: false,
-      });
     }
-  }, [network]);
+  }, [isWrongNetwork, network]);
 
   // const bond params
   const depositInterval = 60 * 60 * 24;
@@ -131,7 +128,7 @@ const CreateBond = () => {
         <CreateBondForm
           network={networkId}
           isLoading={isLoading}
-          isFormDisabled={!address}
+          isFormDisabled={!address || isWrongNetwork}
           onSubmit={handleSubmit}
         />
       </Container>
