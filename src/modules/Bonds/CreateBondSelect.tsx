@@ -6,8 +6,24 @@ import { StyledOption } from "../../common/components/Select/StyledOption";
 import { StyledSelect } from "../../common/components/Select/StyledSelect";
 import { ICreateBondFormValues } from "../../common/interfaces";
 import { addresses } from "../../networkDetails";
+import { theme } from "../../shell/theme/theme";
 
 const Root = styled.div`
+  margin-bottom: 10px;
+`;
+const StyledSelectWrapper = styled.div`
+  position: relative;
+
+  &:after {
+    content: "▼";
+    color: ${theme.colors.white};
+    font-size: 1.5rem;
+    top: 13px;
+    right: 10px;
+    position: absolute;
+  }
+`;
+const SelectLabelWrapper = styled.div`
   margin-bottom: 5px;
 `;
 
@@ -41,13 +57,28 @@ const CreateBondSelect = ({
   const { t } = useTranslation();
   return (
     <Root>
-      <SelectLabel>{t("select-bond-token")}</SelectLabel>
-      <StyledSelect {...register(name)} disabled={isLoading || isFormDisabled}>
-        <StyledOption value={addresses[network].DAI_ADDRESS}>DAI</StyledOption>
-        <StyledOption value={addresses[network].WETH_ADDRESS}>
-          WETH
-        </StyledOption>
-      </StyledSelect>
+      <SelectLabelWrapper>
+        <SelectLabel>{t("bonds.token")}</SelectLabel>
+      </SelectLabelWrapper>
+
+      <StyledSelectWrapper className="select-wrapper">
+        <StyledSelect
+          id={name}
+          {...register(name)}
+          disabled={isLoading || isFormDisabled}
+        >
+          <StyledOption value="" disabled selected>
+            {t("bonds.select-bond-token")}
+          </StyledOption>
+          <StyledOption value={addresses[network].DAI_ADDRESS}>
+            {t("bonds.dai")}
+          </StyledOption>
+          <StyledOption value={addresses[network].WETH_ADDRESS}>
+            {t("bonds.weth")}
+          </StyledOption>
+        </StyledSelect>
+      </StyledSelectWrapper>
+
       {error && <StyledError>{error}</StyledError>}
     </Root>
   );

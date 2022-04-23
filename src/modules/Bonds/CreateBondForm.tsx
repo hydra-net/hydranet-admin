@@ -6,7 +6,6 @@ import { createBondValidationSchema } from "./schema";
 import { useTranslation } from "react-i18next";
 import { ICreateBondFormValues } from "../../common/interfaces";
 import BondInput from "./CreateBondInput";
-import { addresses } from "../../networkDetails";
 import CreateBondSelect from "./CreateBondSelect";
 
 const StyledButton = styled(Button)`
@@ -37,9 +36,6 @@ const CreateBondForm = ({
     formState: { errors },
   } = useForm<ICreateBondFormValues>({
     resolver: yupResolver(createBondValidationSchema),
-    defaultValues: {
-      quoteToken: addresses[network].DAI_ADDRESS,
-    },
   });
   const onProcessSubmit = (data: ICreateBondFormValues) => {
     onSubmit(data);
@@ -58,7 +54,7 @@ const CreateBondForm = ({
       />
       <BondInput
         name={"capacity"}
-        label={t("market")}
+        label={t("bonds.capacity")}
         type={"number"}
         min="0.0000"
         step="0.001"
@@ -71,7 +67,7 @@ const CreateBondForm = ({
 
       <BondInput
         name={"price"}
-        label={t("bond-price")}
+        label={t("bonds.price")}
         placeholder={"eg. 19550000 for DAI or 5560 for ETH, max 9 digits"}
         type={"number"}
         min="1"
@@ -84,7 +80,7 @@ const CreateBondForm = ({
 
       <BondInput
         name={"ending"}
-        label={t("bond-ending")}
+        label={t("bonds.ending")}
         placeholder={"eg. 5"}
         type={"number"}
         min="1"

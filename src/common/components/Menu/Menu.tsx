@@ -6,11 +6,12 @@ import { Label } from "../Label/Label";
 import hydraLogo from "../../../assets/png/hydra-logo.png";
 import bondLogo from "../../../assets/png/bond.png";
 import { Link } from "react-router-dom";
+import { theme } from "../../../shell/theme/theme";
 
 export const StyledMenu = styled.nav`
   display: flex;
   flex-direction: column;
-  background: #0d1328;
+  background: ${theme.colors.blue.darkest};
   height: 100vh;
   text-align: left;
   padding: 2rem;

@@ -5,17 +5,16 @@
   "not-found": "Not found 404",
   "bonds": {
     "create-bond-title": "Create bond",
-    "close-bond": "Close bond",
-    "create-bond-btn": "create"
+    "create-bond-btn": "create",
+    "token": "Bond token",
+    "capacity": "Bond capacity",
+    "price": "Bond price",
+    "ending": "Bond ending days",
+    "select-bond-token": "Select bond token",
+    "dai": "DAI",
+    "weth": "WETH"
   },
-  "quoteToken": "Quote token",
-  "market": "Bond capacity",
-  "booleans": "Booleans",
-  "terms": "Terms",
-  "intervals": "Intervals",
-  "bond-ending": "Bond ending days",
-  "bond-price": "Bond price",
-  "select-bond-token": "Select bond token",
+
   "notification": {
     "copied": "Copied!"
   }

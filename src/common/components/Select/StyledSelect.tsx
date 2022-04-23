@@ -11,6 +11,8 @@ export type StyledSelectProps = {
 };
 
 export const StyledSelect = styled.select<StyledSelectProps>`
+  -webkit-appearance: none;
+  appearance: none;
   font-size: ${theme.paragraph.xl};
   color: ${theme.colors.white};
   background-color: ${theme.colors.blue.dark};

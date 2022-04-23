@@ -3,7 +3,7 @@ import { theme } from "../../../shell/theme/theme";
 
 export const StyledOption = styled.option`
   font-size: ${theme.paragraph.md};
-  background-color: #0d1328;
+  background-color: ${theme.colors.blue.darkest};
 
   &:before {
     content: ">";
