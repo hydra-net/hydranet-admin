@@ -16,7 +16,6 @@ import {
   getTxHashShort,
   getTxUrl,
 } from "../../common/web3/web3";
-import { parseUnits } from "ethers/lib/utils";
 
 const Root = styled.div`
   display: flex;
@@ -64,18 +63,17 @@ const CreateBond = () => {
   const timeToConclusionFixed = 24 * 60 * 60;
   const buffer: BigNumber = BigNumber.from("100000");
   const booleansArr = [true, true];
-  let marketArr: BigNumber[] = [];
 
   const handleSubmit = async (values: ICreateBondFormValues) => {
     setIsLoading(true);
     try {
       const { quoteToken, capacity, price, ending } = values;
 
-      const capacityBig = parseUnits(capacity.toString(), 18);
-      const priceBig = BigNumber.from(price.toString());
-
-      marketArr.push(capacityBig, priceBig, buffer);
-      console.log(quoteToken, capacity, price, marketArr);
+      const marketArr = [
+        BigNumber.from(capacity.toString()),
+        BigNumber.from(price.toString()),
+        buffer,
+      ];
 
       const currentBlockTimestamp = await getBlockTimestamp(network!);
 

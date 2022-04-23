@@ -4,11 +4,9 @@ export const createBondValidationSchema = yup
   .object({
     quoteToken: yup.string().required("Bond token is a required field"),
     capacity: yup
-      .number()
-      .typeError("Bond capacity must be a number")
-      .positive()
-      .min(0.01)
-      .max(Number.MAX_SAFE_INTEGER)
+      .string()
+      .matches(/^[1-9][0-9]*$/, "Only positive non decimal numbers")
+      .max(18, "Bond capacity must be at most 18 characters")
       .required("Bond capacity is a required field"),
     price: yup
       .number()

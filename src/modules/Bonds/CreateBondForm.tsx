@@ -55,12 +55,10 @@ const CreateBondForm = ({
       <BondInput
         name={"capacity"}
         label={t("bonds.capacity")}
-        type={"number"}
-        min="0.0000"
-        step="0.001"
-        max={Number.MAX_SAFE_INTEGER}
         register={register}
-        placeholder={"eg. 300 for DAI or 0.5 for ETH"}
+        placeholder={
+          "eg. 300000000000000000000 for DAI or 500000000000000000 for ETH"
+        }
         error={errors.capacity?.message}
         isDisabled={isLoading || isFormDisabled}
       />
