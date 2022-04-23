@@ -62,7 +62,7 @@ const CreateBond = () => {
   // const bond params
   const depositInterval = 60 * 60 * 24;
   const timeToConclusionFixed = 24 * 60 * 60;
-  const buffer = BigNumber.from(100000);
+  const buffer = BigNumber.from("100000");
   const booleansArr = [true, true];
 
   const handleSubmit = async (values: ICreateBondFormValues) => {
@@ -72,7 +72,7 @@ const CreateBond = () => {
 
       const marketArr = [
         parseUnits(capacity.toString(), 18),
-        BigNumber.from(price),
+        BigNumber.from(price.toString()),
         buffer,
       ];
 

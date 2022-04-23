@@ -67,7 +67,7 @@ const CreateBondSelect = ({
           {...register(name)}
           disabled={isLoading || isFormDisabled}
         >
-          <StyledOption value="" disabled selected>
+          <StyledOption value="" disabled>
             {t("bonds.select-bond-token")}
           </StyledOption>
           <StyledOption value={addresses[network].DAI_ADDRESS}>
