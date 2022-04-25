@@ -105,6 +105,11 @@ Root folder contains:
 
 ### How to close bond
 
-- if something goes wrong
-- go to https://arbiscan.io/address/0xE71d46c6B1ecD2812c11E52Cfb28a4AE3AEa6580#writeContract and use method close, you can get id of bond when clicking on bond on `app.hydranet.ai` in url last number is bond id,
+If you want to close bond.
+
+Go to:
+
+- `Close bond` window, click on dapp menu `Close bond` link, get bond id and click on `close` button
+- you can get id of bond when clicking on bond on `app.hydranet.ai` in url last number is bond id,
   eg. `https://app.hydranet.ai/#/bonds/11`, bond id is `11`
+- alternatively go to https://arbiscan.io/address/0xE71d46c6B1ecD2812c11E52Cfb28a4AE3AEa6580#writeContract and use method close,
