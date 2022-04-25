@@ -12,7 +12,7 @@ import { BigNumber, BigNumberish } from "ethers";
 import CustomToastWithLink from "../../common/components/TransLink/TransactionLink";
 import { DEFAULT_NOTIFY_CONFIG } from "../../common/constants";
 import {
-  getBlockTimestamp,
+  // getBlockTimestamp,
   getTxHashShort,
   getTxUrl,
 } from "../../common/web3/web3";
@@ -60,7 +60,7 @@ const CreateBond = () => {
 
   // const bond params
   const depositInterval = BigNumber.from(60 * 60 * 24);
-  const timeToConclusionFixed = 24 * 60 * 60;
+  const timeToConclusionFixed = 34560;
   const buffer = BigNumber.from("100000");
   const booleansArr = [true, true];
 
@@ -75,11 +75,13 @@ const CreateBond = () => {
         buffer,
       ];
 
-      const currentBlockTimestamp = await getBlockTimestamp(network!);
+      // const currentBlockTimestamp = await getBlockTimestamp(networkId);
 
       const timeToConclusion = timeToConclusionFixed * ending;
+      console.log(timeToConclusion, ending);
       const vesting = BigNumber.from(timeToConclusion);
-      const conclusion = currentBlockTimestamp + timeToConclusion;
+      const conclusion =
+        Math.round(new Date().getTime() / 1000) + timeToConclusion;
       const termsArr = [vesting, BigNumber.from(conclusion)];
 
       const tuneInterval = BigNumber.from(timeToConclusion);
