@@ -68,7 +68,7 @@ const CreateBond = () => {
     setIsLoading(true);
     try {
       const { quoteToken, capacity, price, ending } = values;
-
+      console.log(quoteToken, capacity, price, ending);
       const marketArr: string[] = [capacity, price.toString(), buffer];
 
       const currentBlockTimestamp = await getBlockTimestamp(network!);
