@@ -8,7 +8,6 @@ import { getEncodedCreateFunction } from "../../helpers/bondDepositoryHelper";
 import { useWeb3 } from "@chainsafe/web3-context";
 import { addresses, NetworkId } from "../../networkDetails";
 import { toast } from "react-toastify";
-import { BigNumber } from "ethers";
 import CustomToastWithLink from "../../common/components/TransLink/TransactionLink";
 import { DEFAULT_NOTIFY_CONFIG } from "../../common/constants";
 import {
@@ -61,7 +60,7 @@ const CreateBond = () => {
   // const bond params
   const depositInterval = 60 * 60 * 24;
   const timeToConclusionFixed = 24 * 60 * 60;
-  const buffer: BigNumber = BigNumber.from("100000");
+  const buffer = "100000";
   const booleansArr = [true, true];
 
   const handleSubmit = async (values: ICreateBondFormValues) => {
@@ -69,11 +68,7 @@ const CreateBond = () => {
     try {
       const { quoteToken, capacity, price, ending } = values;
 
-      const marketArr: string[] = [
-        BigNumber.from(capacity).toString(),
-        BigNumber.from(price.toString()).toString(),
-        buffer.toString(),
-      ];
+      const marketArr: string[] = [capacity, price.toString(), buffer];
 
       const currentBlockTimestamp = await getBlockTimestamp(network!);
 
