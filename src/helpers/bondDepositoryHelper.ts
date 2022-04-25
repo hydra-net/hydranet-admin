@@ -34,3 +34,7 @@ export const getEncodedCreateFunction = (
     intervals,
   ]);
 };
+
+export const getEncodedCloseFunction = (_id: number): string => {
+  return BOND_DEPOSITORY_INTERFACE.encodeFunctionData("close", [_id]);
+};

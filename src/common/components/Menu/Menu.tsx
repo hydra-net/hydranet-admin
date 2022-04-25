@@ -5,6 +5,7 @@ import { getHorizontalGap } from "../../styles";
 import { Label } from "../Label/Label";
 import hydraLogo from "../../../assets/png/hydra-logo.png";
 import bondLogo from "../../../assets/png/bond.png";
+import closeBondLogo from "../../../assets/svg/close-bond.svg";
 import { Link } from "react-router-dom";
 import { theme } from "../../../shell/theme/theme";
 
@@ -65,6 +66,11 @@ const Logo = styled.img`
   width: 24px;
 `;
 
+const StyledMenuImg = styled.img`
+  width: 25px;
+  height: auto;
+`;
+
 type Props = {
   props?: any;
 };
@@ -81,14 +87,18 @@ const Menu = ({ props }: Props) => {
 
       <MenuLink to={"/"}>
         <div>
-          <img
-            src={bondLogo}
-            style={{ width: "25px", height: "auto" }}
-            alt="Create bond"
-          />
+          <StyledMenuImg src={bondLogo} alt="Create bond" />
         </div>
 
-        <StyledLabel>{t("bonds.create-bond-title")}</StyledLabel>
+        <StyledLabel margin="0">{t("bonds.create-bond-title")}</StyledLabel>
+      </MenuLink>
+
+      <MenuLink to={"/close-bond"}>
+        <div>
+          <StyledMenuImg src={closeBondLogo} alt="Close bond" />
+        </div>
+
+        <StyledLabel margin="0">{t("bonds.close-bond-title")}</StyledLabel>
       </MenuLink>
     </StyledMenu>
   );

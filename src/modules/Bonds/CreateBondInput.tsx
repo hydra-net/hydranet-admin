@@ -1,9 +1,12 @@
 import { StyledInput } from "../../common/components/Input/styles";
-import { Path, UseFormRegister } from "react-hook-form";
+import { Path } from "react-hook-form";
 import { getVerticalGap } from "../../common/styles";
 import { Label } from "../../common/components/Label/Label";
 import styled from "styled-components";
-import { ICreateBondFormValues } from "../../common/interfaces";
+import {
+  ICloseBondFormValues,
+  ICreateBondFormValues,
+} from "../../common/interfaces";
 
 const StyledInputWrapper = styled.div`
   display: flex;
@@ -29,11 +32,11 @@ type BondInputProps = {
   min?: string | number | undefined;
   step?: string | number | undefined;
   max?: string | number | undefined;
-  name: Path<ICreateBondFormValues>;
+  name: Path<ICreateBondFormValues | ICloseBondFormValues>;
   placeholder?: string;
   error: string | undefined;
   isDisabled: boolean;
-  register: UseFormRegister<ICreateBondFormValues>;
+  register: any;
 };
 
 const BondInput = ({

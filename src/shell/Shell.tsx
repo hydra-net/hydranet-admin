@@ -14,6 +14,11 @@ const CreateBond = lazyWithPreload(
     import(/* webpackChunkName: 'BondsModule' */ "../modules/Bonds/CreateBond")
 );
 
+const CloseBond = lazyWithPreload(
+  () =>
+    import(/* webpackChunkName: 'BondsModule' */ "../modules/Bonds/CloseBond")
+);
+
 const Page404 = lazyWithPreload(
   () =>
     import(/* webpackChunkName: 'Page404Module' */ "../modules/Page404/Page404")
@@ -26,6 +31,7 @@ const Shell = () => {
         <Suspense fallback={<Fallback />}>
           <Routes>
             <Route path={routes.bonds} element={<CreateBond />} />
+            <Route path={routes.closeBond} element={<CloseBond />} />
             <Route path={routes.page404} element={<Page404 />} />
             <Route path="*" element={<Page404 />} />
           </Routes>

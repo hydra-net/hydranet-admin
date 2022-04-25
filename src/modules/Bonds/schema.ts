@@ -24,3 +24,15 @@ export const createBondValidationSchema = yup
       .required("Bond ending days is a required field"),
   })
   .required();
+
+export const closeBondValidationSchema = yup
+  .object({
+    id: yup
+      .number()
+      .typeError("Bond id must be a number")
+      .positive()
+      .min(1)
+      .max(Number.MAX_SAFE_INTEGER)
+      .required("Bond id is a required field"),
+  })
+  .required();

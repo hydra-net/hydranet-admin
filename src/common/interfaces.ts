@@ -4,3 +4,7 @@ export interface ICreateBondFormValues {
   price: number;
   ending: number;
 }
+
+export interface ICloseBondFormValues {
+  id: number;
+}

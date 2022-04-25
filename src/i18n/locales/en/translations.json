@@ -11,6 +11,9 @@
     "price": "Bond price",
     "ending": "Bond ending days",
     "select-bond-token": "Select bond token",
+    "close-bond-title": "Close bond",
+    "close-bond-btn": "Close",
+    "bond-id": "Bond id",
     "dai": "DAI",
     "weth": "WETH"
   },
