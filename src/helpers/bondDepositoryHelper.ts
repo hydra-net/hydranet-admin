@@ -21,7 +21,7 @@ export const getBondDepositoryContract = (networkId: number) => {
 
 export const getEncodedCreateFunction = (
   quoteToken: string,
-  market: any[],
+  market: string[],
   booleans: boolean[],
   terms: number[],
   intervals: number[]
