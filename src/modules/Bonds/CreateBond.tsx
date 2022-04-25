@@ -15,6 +15,7 @@ import {
   getTxHashShort,
   getTxUrl,
 } from "../../common/web3/web3";
+import { TransactionRequest } from "@ethersproject/providers";
 
 const Root = styled.div`
   display: flex;
@@ -79,20 +80,20 @@ const CreateBond = () => {
 
       const tuneInterval = timeToConclusion;
       const intervalsArr = [depositInterval, tuneInterval];
-      const data = getEncodedCreateFunction(
+      const data: string = getEncodedCreateFunction(
         quoteToken,
         marketArr,
         booleansArr,
         termsArr,
         intervalsArr
       );
-
-      const singer = provider?.getUncheckedSigner();
-      const tx = await singer!.sendTransaction({
+      const dto: TransactionRequest = {
         data,
-        to: addresses[network!].BOND_DEPOSITORY,
+        to: addresses[networkId].BOND_DEPOSITORY,
         from: address!,
-      });
+      };
+      const singer = provider?.getUncheckedSigner();
+      const tx = await singer!.sendTransaction(dto);
 
       let transUrl = getTxUrl(network!, tx.hash);
 
