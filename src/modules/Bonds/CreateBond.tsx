@@ -8,6 +8,7 @@ import { getEncodedCreateFunction } from "../../helpers/bondDepositoryHelper";
 import { useWeb3 } from "@chainsafe/web3-context";
 import { addresses, NetworkId } from "../../networkDetails";
 import { toast } from "react-toastify";
+import { BigNumber, BigNumberish } from "ethers";
 import CustomToastWithLink from "../../common/components/TransLink/TransactionLink";
 import { DEFAULT_NOTIFY_CONFIG } from "../../common/constants";
 import {
@@ -15,7 +16,6 @@ import {
   getTxHashShort,
   getTxUrl,
 } from "../../common/web3/web3";
-import { TransactionRequest } from "@ethersproject/providers";
 
 const Root = styled.div`
   display: flex;
@@ -59,41 +59,45 @@ const CreateBond = () => {
   }, [isWrongNetwork, network]);
 
   // const bond params
-  const depositInterval = 60 * 60 * 24;
+  const depositInterval = BigNumber.from(60 * 60 * 24);
   const timeToConclusionFixed = 24 * 60 * 60;
-  const buffer = "100000";
+  const buffer = BigNumber.from("100000");
   const booleansArr = [true, true];
 
   const handleSubmit = async (values: ICreateBondFormValues) => {
     setIsLoading(true);
     try {
       const { quoteToken, capacity, price, ending } = values;
-      console.log(quoteToken, capacity, price, ending);
-      const marketArr: string[] = [capacity, price.toString(), buffer];
+
+      const marketArr: BigNumberish[] = [
+        BigNumber.from(capacity),
+        BigNumber.from(price.toString()),
+        buffer,
+      ];
 
       const currentBlockTimestamp = await getBlockTimestamp(network!);
 
       const timeToConclusion = timeToConclusionFixed * ending;
-      const vesting = timeToConclusion;
+      const vesting = BigNumber.from(timeToConclusion);
       const conclusion = currentBlockTimestamp + timeToConclusion;
-      const termsArr = [vesting, conclusion];
+      const termsArr = [vesting, BigNumber.from(conclusion)];
 
-      const tuneInterval = timeToConclusion;
+      const tuneInterval = BigNumber.from(timeToConclusion);
       const intervalsArr = [depositInterval, tuneInterval];
-      const data: string = getEncodedCreateFunction(
+      const data = getEncodedCreateFunction(
         quoteToken,
         marketArr,
         booleansArr,
         termsArr,
         intervalsArr
       );
-      const dto: TransactionRequest = {
-        data,
-        to: addresses[networkId].BOND_DEPOSITORY,
-        from: address!,
-      };
+
       const singer = provider?.getUncheckedSigner();
-      const tx = await singer!.sendTransaction(dto);
+      const tx = await singer!.sendTransaction({
+        data,
+        to: addresses[network!].BOND_DEPOSITORY,
+        from: address!,
+      });
 
       let transUrl = getTxUrl(network!, tx.hash);
 
