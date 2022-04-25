@@ -1,4 +1,4 @@
-import { BigNumber, ethers } from "ethers";
+import { ethers } from "ethers";
 import { Interface } from "ethers/lib/utils";
 import bondDepositoryAbi from "../common/abis/bond-depository-abi";
 import {
@@ -21,7 +21,7 @@ export const getBondDepositoryContract = (networkId: number) => {
 
 export const getEncodedCreateFunction = (
   quoteToken: string,
-  market: BigNumber[],
+  market: any[],
   booleans: boolean[],
   terms: number[],
   intervals: number[]
